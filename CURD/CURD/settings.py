@@ -81,11 +81,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME':'CURD',
-        'USER':'root',
-        'PASSWORD':'root',
-        'HOST':'localhost',
-        'PORT':'3306'
+        'NAME':'#', # YOUR DATABASE NAME 
+        'USER':'#', # YOUR MYSQL USERNAME 
+        'PASSWORD':'#', # YOUR MYSQL PASSWORD 
+        'HOST':'#', # MYSQL HOST 
+        'PORT':'#' # MYSQL PORT 
         
     }
 }
