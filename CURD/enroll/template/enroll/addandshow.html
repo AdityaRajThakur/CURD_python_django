@@ -1,0 +1,51 @@
+{% extends 'enroll/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h3 class = "text-center alert-info">Add new student </h3>
+        <form action="" method="POST" >
+            {% csrf_token %}
+            {{object.as_p}}
+            <input type="submit" class = "btn btn-success" value = "Add">
+        </form>
+
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h3 class = 'alert-info text-center'>Show Student Information</h3>
+            {% if object_list %}
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for obj in object_list %} 
+                    <tr>
+                        <th scope="row">{{obj.id}}</th>
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.email}}</td>
+                        <td>@{{obj.password}}</td>
+                        <td>
+                            <a href={% url 'updatestudent' obj.id %} class="btn btn-warning btn-sm">Edit</a>
+                            <form action={% url 'delete_data' obj.id %} method = 'POST' class="d-inline">
+                                {% csrf_token %}
+                                <input type="submit" class = "btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+              
+            {% else %}
+                <h1 class = 'alert-info text-center' >No Records </h1>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}
