@@ -1,6 +1,9 @@
+from asyncio import exceptions
 from django.shortcuts import render ,HttpResponseRedirect
 from enroll.forms import StduentRegistration
 from .models import User
+
+from django.http import Http404
  
 # Create your views here.
 
@@ -32,7 +35,10 @@ def update_data(request ,id):
             fm.save()
             return HttpResponseRedirect('/')    
     else:
-        c_obj = User.objects.get(pk = id) 
-        fm = StduentRegistration(instance =c_obj) 
-    
+        try:
+            c_obj = User.objects.get(pk = id) 
+            fm = StduentRegistration(instance =c_obj) 
+        except:
+            raise Http404('The Account that you are trying to update is not found..')
     return render(request , 'enroll/updatestudent.html', {'object' :fm})
+

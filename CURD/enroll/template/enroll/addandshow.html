@@ -3,16 +3,16 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-4">
-        <h3 class = "text-center alert-info">Add new student </h3>
+        <h3 class = "text-center rounded alert-info">Add new student </h3>
         <form action="" method="POST" >
             {% csrf_token %}
             {{object.as_p}}
-            <input type="submit" class = "btn btn-success" value = "Add">
+            <input type="submit" class = "btn btn-success form-control" value = "Add">
         </form>
 
     </div>
     <div class="col-sm-7 offset-1">
-        <h3 class = 'alert-info text-center'>Show Student Information</h3>
+        <h3 class = 'alert-info  rounded text-center'>Show Student Information</h3>
             {% if object_list %}
             <table class="table table-hover">
                 <thead>
@@ -44,7 +44,7 @@
               </table>
               
             {% else %}
-                <h1 class = 'alert-info text-center' >No Records </h1>
+                <h1 class = 'alert-info text-center rounded ' >No Records </h1>
             {% endif %}
     </div>
 </div>
