@@ -2,21 +2,25 @@ from asyncio import exceptions
 from django.shortcuts import render ,HttpResponseRedirect
 from enroll.forms import StduentRegistration
 from .models import User
-
+from django.views.generic import CreateView
 from django.http import Http404
  
 # Create your views here.
 
-def add_show(request):
-    obj =  StduentRegistration() 
-    object_list = User.objects.all() 
-    if request.method=='POST':
-        obj = StduentRegistration(request.POST)
-        if obj.is_valid():
-            obj.save()
-            obj = StduentRegistration()
+class AddStudent(CreateView):
+    model = User 
+    form_class = StduentRegistration
+    template_name = 'enroll/addandshow.html'
+    success_url = '/login/'
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-    return render(request,'enroll/addandshow.html' ,{'object':obj , 'object_list':object_list})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = User.objects.all()
+        return context 
 
 
 def delete_data(request ,id):

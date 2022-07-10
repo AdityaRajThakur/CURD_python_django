@@ -15,14 +15,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
-from enroll.views import delete_data ,update_data
-from enroll.views import AddStudent
-app_name = 'CURD'
+from django.urls import path
+from django.views.generic import TemplateView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',AddStudent.as_view(),name = 'classviewaddstudent'),
-    path('delete/<int:id>' , delete_data , name = 'delete_data'),
-    path('update/<int:id>' , update_data , name = 'updatestudent'),
-    path('login/',include('enroll.urls'), name = 'mylogin')
+    path('',TemplateView.as_view(template_name = 'enroll/login.html') , name = 'loginpage')
 ]
