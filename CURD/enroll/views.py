@@ -2,7 +2,7 @@ from asyncio import exceptions
 from django.shortcuts import render ,HttpResponseRedirect
 from enroll.forms import StduentRegistration
 from .models import User
-from django.views.generic import CreateView
+from django.views.generic import CreateView,DeleteView
 from django.http import Http404
  
 # Create your views here.
