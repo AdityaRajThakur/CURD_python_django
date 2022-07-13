@@ -16,13 +16,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from enroll.views import delete_data ,update_data
-from enroll.views import AddStudent
+from enroll.views import AddStudent,UpdateStudent,DeleteStudent
+
 app_name = 'CURD'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',AddStudent.as_view(),name = 'classviewaddstudent'),
-    path('delete/<int:id>' , delete_data , name = 'delete_data'),
-    path('update/<int:id>' , update_data , name = 'updatestudent'),
+    path('delete/<int:pk>' ,DeleteStudent.as_view() , name = 'delete_data'),
+    path('update/<int:pk>/' ,UpdateStudent.as_view(), name = 'updatestudent'),
     path('login/',include('enroll.urls'), name = 'mylogin')
 ]

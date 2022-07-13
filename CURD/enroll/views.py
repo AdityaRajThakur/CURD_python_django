@@ -1,15 +1,12 @@
-from asyncio import exceptions
-from django.shortcuts import render ,HttpResponseRedirect
-from enroll.forms import StduentRegistration
+from enroll.forms import StudentRegistration
 from .models import User
-from django.views.generic import CreateView,DeleteView
-from django.http import Http404
+from django.views.generic import CreateView,DeleteView, UpdateView
  
 # Create your views here.
 
 class AddStudent(CreateView):
     model = User 
-    form_class = StduentRegistration
+    form_class = StudentRegistration
     template_name = 'enroll/addandshow.html'
     success_url = '/login/'
     
@@ -22,27 +19,14 @@ class AddStudent(CreateView):
         context['object_list'] = User.objects.all()
         return context 
 
+class UpdateStudent(UpdateView):
+    model = User 
+    form_class  = StudentRegistration
+    template_name = 'enroll/updatestudent.html' 
+    success_url = '/login/'
 
-def delete_data(request ,id):
-    if request.method=='POST':
-        obj = User.objects.get(pk = id) 
-        obj.delete()
-        return HttpResponseRedirect('/')
-
-
-def update_data(request ,id):
     
-    if request.method=='POST':
-        c_obj = User.objects.get(pk = id)
-        fm = StduentRegistration(request.POST , instance=c_obj)
-        if fm.is_valid():
-            fm.save()
-            return HttpResponseRedirect('/')    
-    else:
-        try:
-            c_obj = User.objects.get(pk = id) 
-            fm = StduentRegistration(instance =c_obj) 
-        except:
-            raise Http404('The Account that you are trying to update is not found..')
-    return render(request , 'enroll/updatestudent.html', {'object' :fm})
-
+class DeleteStudent(DeleteView):
+    model = User 
+    success_url = '/login/'
+    template_name = 'enroll/DeleteStudent.html' 
