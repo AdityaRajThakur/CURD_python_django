@@ -25,8 +25,8 @@ class UpdateStudent(UpdateView):
     template_name = 'enroll/updatestudent.html' 
     success_url = '/login/'
 
-    
+
 class DeleteStudent(DeleteView):
     model = User 
-    success_url = '/login/'
+    success_url = '/'
     template_name = 'enroll/DeleteStudent.html' 
